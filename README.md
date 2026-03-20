@@ -1,6 +1,6 @@
 # Crypto Portfolio Tracker
 
-A full-stack web application that allows cryptocurrency investors to track their holdings in one place. Users can create an account, add their cryptocurrencies, and view real-time portfolio value, asset allocation, and profit/loss — all powered by live market data from the CoinGecko API.
+A full-stack web application that allows cryptocurrency investors to track their holdings in one place. Users can create an account, add their cryptocurrencies, and view real-time portfolio value, asset allocation, and profit/loss. All of which is powered by live market data from the CoinGecko API.
 
 ## Running the Frontend
 
