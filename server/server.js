@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express'); 
 const {User, Holdings, sequelize} = require('./models/index')
 
