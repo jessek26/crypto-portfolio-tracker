@@ -8,8 +8,14 @@ const router = express.Router();
 //register route
 router.post('/register', async (req,res) => {
     try {
-    const { email, password } = req.body;
-    
+    const email = req.body?.email;
+    const password = req.body?.password;
+
+     //if email or password is left empty
+    if(!email || !password) {
+        return res.status(400).json({ error: 'Email and password are required'});
+    }
+
     //looks for the email already being used by a user
     const existingUser = await User.findOne({ where: { email }});
 
@@ -35,7 +41,14 @@ router.post('/register', async (req,res) => {
 //login route
 router.post('/login', async (req, res)  => {
     try{
-        const { email, password } = req.body;
+       const email = req.body?.email;
+       const password = req.body?.password;
+
+        //if email or password is left empty
+    if(!email || !password) {
+        return res.status(400).json({ error: 'Email and password are required'});
+    }
+
 
         const existingUser = await User.findOne({ where: { email }});
         if(!existingUser) {
