@@ -15,10 +15,12 @@ router.get('/', authenticateToken, async (req, res) => {
 }
 }) 
 
+//add a new holding
 router.post('/', authenticateToken, async (req, res) => {
     try{
         const{ coinId, coinName, quantity, purchasePrice } = req.body
 
+        //if any of these fileds are left blank
         if(!coinId || !coinName || !quantity || !purchasePrice) {
             return res.status(400).json({ error:'missing information' })
         }
@@ -31,6 +33,7 @@ router.post('/', authenticateToken, async (req, res) => {
     }
 })
 
+//update a holding
 router.put('/:id', authenticateToken, async (req, res) => {
     try{ 
     const holdingId = req.params.id;
@@ -40,6 +43,7 @@ router.put('/:id', authenticateToken, async (req, res) => {
         return res.status(400).json({ error:'missing information' })
     } 
 
+    //finds the holding by id and verifies it belongs to the logged in user
     const findHolding = await Holdings.findOne({ where: { id: holdingId, UserId: req.user.id } })
     if(!findHolding){
         return res.status(404).json({ error:'not found' });
@@ -54,15 +58,18 @@ router.put('/:id', authenticateToken, async (req, res) => {
 
 })
 
+//delete a holding
 router.delete('/:id', authenticateToken, async (req, res) => {
     try{
         const holdingId = req.params.id; 
+        //finds the holding by id and verifies it belongs to the logged in user
         const findHolding = await Holdings.findOne({ where: { id: holdingId, UserId: req.user.id }})
 
         if(!findHolding) {
             return res.status(404).json({ error:'holding not found' });
         }
 
+        //waits for the holding to be deleted
         await findHolding.destroy();
         return res.json('Holding deleted!')
 
