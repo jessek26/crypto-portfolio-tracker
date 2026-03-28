@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { login } from '../services/api';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 function Login(){
     const [email, setEmail] = useState('');
@@ -23,7 +23,7 @@ function Login(){
     }
 
     return (
-        <div className="login">
+        <div className="login-page">
             <div>
                 <h1 className="login-heading">Login</h1>
             </div>
@@ -42,6 +42,8 @@ function Login(){
 
                 <button className="submit-btn">Login</button>
                 {error && <p>{error}</p>}
+
+                <Link to='/register'>Don't have an account? Register here</Link>
             </form>
         </div>
     );
