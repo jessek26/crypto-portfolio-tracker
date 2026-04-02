@@ -27,6 +27,8 @@ function Dashboard() {
     }, []);
 
     const calculateTotalValue = () => {
+        if (!holdings || !Array.isArray(holdings)) return '0.00';
+
         return holdings.reduce((total, holding) => {
             const price = prices[holding.coinId]?.usd || 0;
             return total + (price * holding.quantity);
@@ -50,7 +52,7 @@ function Dashboard() {
                 <div>
                     <h2>Total Value: ${calculateTotalValue()}</h2>
                     <ul>
-                        {holdings.map(holding => {
+                        {Array.isArray(holdings) && holdings.map(holding => {
                             const currentPrice = prices[holding.coinId]?.usd || 0;
                             const currentValue = (currentPrice * holding.quantity).toFixed(2);
                             const pnl = (currentValue - (holding.purchasePrice * holding.quantity)).toFixed(2);
