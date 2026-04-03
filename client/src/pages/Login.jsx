@@ -24,10 +24,9 @@ function Login(){
 
     return (
         <div className="login-page">
-            <div>
-                <h1 className="login-heading">Login</h1>
-            </div>
             <form onSubmit={handleSubmit} className="login-form">
+            <h1 className="login-heading">Login</h1>
+
                 <input
                 type="email"
                 className="email-field"

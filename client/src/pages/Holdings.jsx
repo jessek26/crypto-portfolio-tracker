@@ -65,8 +65,7 @@ const handleDelete = async (id) => {
 
         {loading ? <p>Loading...</p> : (
             <ul>
-                {holdings.map(holding => (
-                    <li key={holding.id}>
+{Array.isArray(holdings) && holdings.map(holding => (                    <li key={holding.id}>
                         {holding.coinName} — {holding.quantity} @ ${holding.purchasePrice}
                         <button onClick={() => handleDelete(holding.id)}>Delete</button>
                     </li>

@@ -42,16 +42,16 @@ function Dashboard() {
 
     return (
         <div className="dashboard">
-            <div>
+            <div className="dashboard-header">
                 <h1>My Portfolio</h1>
-                <button onClick={handleLogout}>Logout</button>
+                <button className="logout-btn" onClick={handleLogout}>Logout</button>
             </div>
 
             {error && <p>{error}</p>}
             {loading ? <p>Loading...</p> : (
                 <div>
                     <h2>Total Value: ${calculateTotalValue()}</h2>
-                    <ul>
+                    <ul className="holdings-list">
                         {Array.isArray(holdings) && holdings.map(holding => {
                             const currentPrice = prices[holding.coinId]?.usd || 0;
                             const currentValue = (currentPrice * holding.quantity).toFixed(2);
@@ -67,7 +67,7 @@ function Dashboard() {
                             )
                         })}
                     </ul>
-                    <button onClick={() => navigate('/holdings')}>Manage Holdings</button>
+                    <button className="manage-btn" onClick={() => navigate('/holdings')}>Manage Holdings</button>
                 </div>
             )}
         </div>

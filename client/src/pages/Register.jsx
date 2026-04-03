@@ -22,10 +22,8 @@ function Register() {
 
         return (
             <div className="register-page">
-                <div>
-                    <h1 className="register-heading">Register</h1>
-                </div>
                 <form onSubmit={handleSubmit} className="register-form">
+                <h1 className="register-heading">Register</h1>
                     <input 
                     type="email"
                     className="email-field"
