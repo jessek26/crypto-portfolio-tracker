@@ -32,7 +32,7 @@ function Holdings(){
 const handleAdd = async (e) => {
     e.preventDefault();
     try {
-        await addHolding(coinId, coinName, quantity, purchasePrice);
+        await addHolding(coinId.toLowerCase(), coinName, quantity, purchasePrice);
         await fetchHoldings(); // refresh the list
         // clear the form
         setCoinId('');
@@ -55,19 +55,23 @@ const handleDelete = async (id) => {
 
     return (
         <div className="holdings-page">
-            <form onSubmit={handleAdd}>
-            <input placeholder="Coin ID (e.g. bitcoin)" value={coinId} onChange={(e) => setCoinId(e.target.value)} />
+            <form className='holdings-form' onSubmit={handleAdd}>
+            <input placeholder="Coin ID - must be lowercase (e.g. bitcoin)" value={coinId} onChange={(e) => setCoinId(e.target.value)} />
             <input placeholder="Coin Name (e.g. Bitcoin)" value={coinName} onChange={(e) => setCoinName(e.target.value)} />
             <input placeholder="Quantity" type="number" value={quantity} onChange={(e) => setQuantity(e.target.value)} />
             <input placeholder="Purchase Price" type="number" value={purchasePrice} onChange={(e) => setPurchasePrice(e.target.value)} />
             <button type="submit">Add Holding</button>
         </form>
+        <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', marginTop: '-0.5rem' }}>
+                Not sure of the Coin ID? Look it up at <a href="https://www.coingecko.com" target="_blank" rel="noreferrer">coingecko.com</a>
+        </p>
 
         {loading ? <p>Loading...</p> : (
-            <ul>
-{Array.isArray(holdings) && holdings.map(holding => (                    <li key={holding.id}>
+            <ul className="holdings-item-list">
+            {Array.isArray(holdings) && holdings.map(holding => (                    
+                    <li className="holdings-item" key={holding.id}>
                         {holding.coinName} — {holding.quantity} @ ${holding.purchasePrice}
-                        <button onClick={() => handleDelete(holding.id)}>Delete</button>
+                        <button className="delete-btn" onClick={() => handleDelete(holding.id)}>Delete</button>
                     </li>
                 ))}
             </ul>

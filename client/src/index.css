@@ -5,7 +5,7 @@
 }
 
 :root {
-    --background: #0f0f0f;
+    --background: hsl(42, 38%, 5%);
     --surface: #1a1a1a;
     --border: #2a2a2a;
     --primary: #00c896;
@@ -164,4 +164,107 @@ a {
 
 .manage-btn:hover {
     opacity: 0.9;
+}
+
+/* Holdings Page */
+.holdings-page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.holdings-page h1 {
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+}
+
+.holdings-form {
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.holdings-form input {
+    background-color: var(--background);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    color: var(--text);
+    font-size: 1rem;
+    outline: none;
+}
+
+.holdings-form input:focus {
+    border-color: var(--primary);
+}
+
+.holdings-form button {
+    background-color: var(--primary);
+    color: #000;
+    border: none;
+    border-radius: 8px;
+    padding: 0.75rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.holdings-item-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.holdings-item {
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.delete-btn {
+    background-color: transparent;
+    border: 1px solid var(--danger);
+    color: var(--danger);
+    border-radius: 8px;
+    padding: 0.5rem 0.8rem;
+    margin: 0rem 0rem 0rem 0.5rem;
+    cursor: pointer;
+    font-size: 0.85rem;
+}
+
+.delete-btn:hover {
+    background-color: var(--danger);
+    color: white;
+}
+
+/* Button hover transitions */
+.submit-btn, .manage-btn, .holdings-form button, .logout-btn, .delete-btn {
+    transition: all 0.2s ease;
+}
+
+.submit-btn:hover, .manage-btn:hover, .holdings-form button:hover {
+    opacity: 0.85;
+    transform: scale(1.03);
+}
+
+.logout-btn:hover {
+    background-color: var(--danger);
+    color: white;
+    transform: scale(1.02);
+}
+
+.delete-btn:hover {
+    background-color: var(--danger);
+    color: white;
+    transform: scale(1.05);
 }

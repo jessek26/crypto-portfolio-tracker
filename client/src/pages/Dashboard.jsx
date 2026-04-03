@@ -32,7 +32,7 @@ function Dashboard() {
         return holdings.reduce((total, holding) => {
             const price = prices[holding.coinId]?.usd || 0;
             return total + (price * holding.quantity);
-        }, 0).toFixed(2);
+            }, 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
     }
 
     const handleLogout = () => {
@@ -53,16 +53,20 @@ function Dashboard() {
                     <h2>Total Value: ${calculateTotalValue()}</h2>
                     <ul className="holdings-list">
                         {Array.isArray(holdings) && holdings.map(holding => {
-                            const currentPrice = prices[holding.coinId]?.usd || 0;
-                            const currentValue = (currentPrice * holding.quantity).toFixed(2);
-                            const pnl = (currentValue - (holding.purchasePrice * holding.quantity)).toFixed(2);
+                            const rawPrice = prices[holding.coinId]?.usd || 0;
+                            const currentPrice = rawPrice.toLocaleString('en-US');
+                            const rawValue = rawPrice * holding.quantity;
+                            const currentValue = rawValue.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                            const pnl = (rawValue - (holding.purchasePrice * holding.quantity)).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
                             return (
-                                <li key={holding.id}>
+                                <li className="holding-item" key={holding.id}>
                                     <strong>{holding.coinName}</strong> — 
                                     Quantity: {holding.quantity} | 
                                     Current Price: ${currentPrice} | 
                                     Value: ${currentValue} | 
-                                    P&L: ${pnl}
+                                    <span style={{ color: parseFloat(pnl.replace(/,/g, '')) >= 0 ? 'var(--primary)' : 'var(--danger)' }}>
+                                        {' | '}P&L: ${pnl}
+                                    </span>                                
                                 </li>
                             )
                         })}
