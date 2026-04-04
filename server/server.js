@@ -9,7 +9,9 @@ const cors = require('cors');
 //intiliazing express
 const app = express();
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+    origin: 'https://your-vercel-url.vercel.app'
+}));
 
 app.use('/api/auth', authRouter);
 app.use('/api/holdings', holdingRouter)
