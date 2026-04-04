@@ -4,7 +4,6 @@ const holdingsModel = require('./Holdings')
 
 const sequelize = new Sequelize({
     dialect: 'sqlite',
-    dialectModule: require('better-sqlite3'),
     storage: './database.sqlite'
 });
 
