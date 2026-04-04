@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:3000/api';
+const BASE_URL = 'https://crypto-portfolio-tracker-ivh7.onrender.com/api';
 
 const getAuthHeaders = () => ({
     'Content-Type': 'application/json',
