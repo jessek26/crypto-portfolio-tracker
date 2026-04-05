@@ -18,8 +18,9 @@ router.get('/', authenticateToken, async (req, res) => {
         return res.json(response.data)
 
     } catch (error) { 
-        return res.status(500).json({ error: 'something went wrong' })
-    }
+    console.log('Prices error:', error.message);
+    return res.status(500).json({ error: error.message })
+}
 })
 
 module.exports = router;
