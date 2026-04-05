@@ -10,7 +10,7 @@ const cors = require('cors');
 const app = express();
 app.use(express.json());
 app.use(cors({
-    origin: 'https://your-vercel-url.vercel.app'
+    origin: 'https://crypto-portfolio-tracker-beige.vercel.app'
 }));
 
 app.use('/api/auth', authRouter);
