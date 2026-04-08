@@ -7,6 +7,8 @@ const router = express.Router()
 let priceCache = {};
 let lastFetched = null;
 
+
+
 router.get('/', authenticateToken, async (req, res) => {
     try {
         const findHoldings = await Holdings.findAll({ where: { UserId: req.user.id }});
@@ -20,7 +22,10 @@ router.get('/', authenticateToken, async (req, res) => {
         // only fetch from CoinGecko if cache is older than 60 seconds
         const now = Date.now();
         if (!lastFetched || now - lastFetched > 60000) {
-            const response = await axios.get(`https://api.coingecko.com/api/v3/simple/price?ids=${coinIds}&vs_currencies=usd`);
+        const response = await axios.get(
+            `https://api.coingecko.com/api/v3/simple/price?ids=${coinIds}&vs_currencies=usd`,
+            { headers: { 'x-cg-demo-api-key': process.env.COINGECKO_API_KEY } }
+        );            
             priceCache = response.data;
             lastFetched = now;
         }
