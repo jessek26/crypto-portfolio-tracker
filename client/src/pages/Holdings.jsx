@@ -10,6 +10,7 @@ function Holdings(){
     const [purchasePrice, setPurchasePrice] = useState('');
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
 
     const fetchHoldings = async () => {
          try{
@@ -54,29 +55,33 @@ const handleDelete = async (id) => {
 }
 
     return (
-        <div className="holdings-page">
-            <form className='holdings-form' onSubmit={handleAdd}>
-            <input placeholder="Coin ID - must be lowercase (e.g. bitcoin)" value={coinId} onChange={(e) => setCoinId(e.target.value)} />
-            <input placeholder="Coin Name (e.g. Bitcoin)" value={coinName} onChange={(e) => setCoinName(e.target.value)} />
-            <input placeholder="Quantity" type="number" value={quantity} onChange={(e) => setQuantity(e.target.value)} />
-            <input placeholder="Purchase Price" type="number" value={purchasePrice} onChange={(e) => setPurchasePrice(e.target.value)} />
-            <button type="submit">Add Holding</button>
-        </form>
-        <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', marginTop: '-0.5rem' }}>
-                Not sure of the Coin ID? Look it up at <a href="https://www.coingecko.com" target="_blank" rel="noreferrer">coingecko.com</a>
-        </p>
+            <div className="holdings-page">
+                <div className="holdings-header">
+                    <h1>Manage Holdings</h1>
+                    <button className="back-btn" onClick={() => navigate('/dashboard')}>← Back to Dashboard</button>
+                </div>
+                <form className='holdings-form' onSubmit={handleAdd}>
+                <input placeholder="Coin ID - must be lowercase (e.g. bitcoin)" value={coinId} onChange={(e) => setCoinId(e.target.value)} />
+                <input placeholder="Coin Name (e.g. Bitcoin)" value={coinName} onChange={(e) => setCoinName(e.target.value)} />
+                <input placeholder="Quantity" type="number" value={quantity} onChange={(e) => setQuantity(e.target.value)} />
+                <input placeholder="Purchase Price" type="number" value={purchasePrice} onChange={(e) => setPurchasePrice(e.target.value)} />
+                <button type="submit">Add Holding</button>
+                </form>
+                <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', marginTop: '-0.5rem' }}>
+                        Not sure of the Coin ID? Look it up at <a href="https://www.coingecko.com" target="_blank" rel="noreferrer">coingecko.com</a>
+                </p>
 
-        {loading ? <p>Loading...</p> : (
-            <ul className="holdings-item-list">
-            {Array.isArray(holdings) && holdings.map(holding => (                    
-                    <li className="holdings-item" key={holding.id}>
-                        {holding.coinName} — {holding.quantity} @ ${holding.purchasePrice}
-                        <button className="delete-btn" onClick={() => handleDelete(holding.id)}>Delete</button>
-                    </li>
-                ))}
-            </ul>
-        )}
-        </div>
+                {loading ? <p>Loading...</p> : (
+                    <ul className="holdings-item-list">
+                    {Array.isArray(holdings) && holdings.map(holding => (                    
+                            <li className="holdings-item" key={holding.id}>
+                                {holding.coinName} — {holding.quantity} @ ${holding.purchasePrice}
+                                <button className="delete-btn" onClick={() => handleDelete(holding.id)}>Delete</button>
+                            </li>
+                        ))}
+                    </ul>
+                )}
+            </div>
     );
 }
 
