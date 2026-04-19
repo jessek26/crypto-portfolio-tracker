@@ -1,4 +1,4 @@
-const BASE_URL = 'https://crypto-portfolio-tracker-ivh7.onrender.com/api';
+const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000/api';
 
 const getAuthHeaders = () => ({
     'Content-Type': 'application/json',

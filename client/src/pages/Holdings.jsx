@@ -58,7 +58,7 @@ const handleDelete = async (id) => {
             <div className="holdings-page">
                 <div className="holdings-header">
                     <h1>Manage Holdings</h1>
-                    <button className="back-btn" onClick={() => navigate('/dashboard')}>← Back to Dashboard</button>
+                    <button className="back-btn" onClick={() => navigate('/dashboard')}>Back to Dashboard</button>
                 </div>
                 <form className='holdings-form' onSubmit={handleAdd}>
                 <input placeholder="Coin ID - must be lowercase (e.g. bitcoin)" value={coinId} onChange={(e) => setCoinId(e.target.value)} />
