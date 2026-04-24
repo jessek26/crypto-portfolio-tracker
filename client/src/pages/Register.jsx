@@ -6,10 +6,12 @@ function Register() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true);
         try{
             const response = await register(email, password);
                 localStorage.setItem('token', response.token)
@@ -17,6 +19,7 @@ function Register() {
             navigate('/dashboard')
         } catch (error) {
             setError('invalid email or password')
+            setLoading(false);
         }
     }
 
@@ -39,7 +42,9 @@ function Register() {
                     onChange={(e) => setPassword(e.target.value)}
                      />
 
-                    <button className="submit-btn">Register</button>
+                    <button className="submit-btn">
+                        {loading ? 'Creating account...' : 'Register'}
+                    </button>
                     {error && <p>{error}</p>}
 
                     <Link to='/'>Already have an account? Login here</Link>

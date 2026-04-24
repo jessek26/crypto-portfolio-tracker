@@ -6,11 +6,13 @@ function Login(){
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
     
     
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true);
         try {
         const response = await login(email, password); //uses login function to take their email and password
             localStorage.setItem('token', response.token) //stores token in localStorage
@@ -18,6 +20,7 @@ function Login(){
         navigate('/dashboard'); //navigates user to their dashborad upon successful login
         } catch (error) {
             setError('invalid email or password')
+            setLoading(false);
         }
 
     }
@@ -41,8 +44,10 @@ function Login(){
                 placeholder="Password"
                 onChange={(e) => setPassword(e.target.value)} />
 
-                <button className="submit-btn">Login</button>
-                {error && <p>{error}</p>}
+            <button className="submit-btn" disabled={loading}>
+                {loading ? 'Logging in...' : 'Login'}
+            </button>                
+            {error && <p>{error}</p>}
 
                 <Link to='/register'>Don't have an account? Register here</Link>
             </form>
