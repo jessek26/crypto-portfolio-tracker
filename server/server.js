@@ -30,7 +30,7 @@ sequelize.sync().then(() => {
 
 const PORT = process.env.PORT || 3000;
 if(process.env.NODE_ENV !== 'test') {
-    app.listen(PORT, () => console.log(`server running on ${PORT}`))
+    app.listen(PORT, '0.0.0.0', () => console.log(`server running on ${PORT}`))
 }
 
-module.exports = app; 
+module.exports = app;
